@@ -1,6 +1,6 @@
 https://segmentfault.com/a/1190000016799146 // webpack配置入门
 https://segmentfault.com/a/1190000016807803 // Webpack面试题
-
+https://www.huaweicloud.com/articles/b56ddb05aad92e077813c643cd605dea.html  // 本地文件推送到远程仓库
 webpack
 webpack-cli
 clean-webpack-plugin  // 清理dist目录

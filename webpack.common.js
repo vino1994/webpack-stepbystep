@@ -13,9 +13,9 @@ module.exports = {
   },
   output: {
     clean: true,
-    filename: '[name].[fullhash:8].bundle.js',
+    filename: '[name].[chunkhash:8].bundle.js', // 输出js文件
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'images/[hash:8][ext][query]'
+    assetModuleFilename: 'images/[hash:8][ext][query]' // 输出图片
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -25,8 +25,8 @@ module.exports = {
     }),
     new DashboardPlugin(),
     new MiniCssExtractPlugin({
-      filename: devMode ? 'css/[name].css' : 'css/[name].[fullhash:8].css',
-      chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[fullhash:8].css',
+      filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash:8].css', // 输出css文件
+      // chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash:8].css', // 输出chunk css文件__chunkFilename 指未被列在 entry 中，却又需要被打包出来的 chunk 文件的名称。一般来说，这个 chunk 文件指的就是要懒加载的代码
     }),
     new SpeedMeasurePlugin(),
     //   // 默认配置的具体配置项
@@ -84,14 +84,14 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        type: 'asset/resource'
-        // use: [{
-        //   loader: 'url-loader',
-        //   options: {
-        //     limit: 10240,
-        //     name: 'images/[name].[ext]'
-        //   },
-        // }]
+        // type: 'asset/resource' // webpack5 写法
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10240,
+            name: 'images/[hash:8][ext][query]'
+          },
+        }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
